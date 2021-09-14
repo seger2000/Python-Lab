@@ -1,0 +1,253 @@
+20)	Să se afişeze toate numerele prime situate în intervalul [p, q], precum şi numărul acestora, unde p şi q sunt două numere naturale date.
+Exemplu: Pentru p=10 şi q=25 se vor afişa numerele 11, 13, 17, 19, 23.
+
+
+p = int(input("p : "))
+q = int(input("q : "))
+count = 0
+
+for num in range(p, q+1):
+    prime = True
+    for i in range(2, num):
+        if (num % i == 0):
+            prime = False
+    if prime:
+       print(num)
+       count += 1
+print('Nr de elemente prime: ' + str(count))
+
+
+
+19)	Să se afişeze toate numerele de 2 cifre care împărţite la 15 dau un rest egal cu pătratul câtului.
+Exemplu, Un astfel de număr este 34 (34:15=2 rest 4 şi 22=4).
+
+
+for num in range(10, 100):
+    if num % 15 == (num // 15)**2:
+        print(num)
+
+
+
+18)	Pentru un întreg n dat să se afişeze toate numerele naturale mai mici sau egale cu n a căror sumă a cifrelor este impară.
+Exemplu: Pentru n=15 se vor afişa numerele 1, 3, 5, 7, 9, 10, 12, 14.
+
+
+n = int(input('n : '))
+
+for num in range(1, n+1):
+    sum = (num % 10) + (num // 10)
+    if sum % 2 != 0:
+        print(num)
+
+
+17)	Să se afizeşe descompunerea în factori primi ai unui număr natural nenul dat. Afişarea se va face sub forma:
+3268 | 2
+1634 | 2
+  817 | 19
+    43 | 43
+     1 |
+
+
+#varianta 1
+n = int(input('n : '))
+d = 1
+
+n_list = []
+d_list = []
+
+while n > 1:
+    d += 1
+    while n % d == 0:
+        n_list.append(n)
+        n = n /d
+        d_list.append(d)
+for i in range(0, len(n_list)):
+    print(str(n_list[i]) + ' | ' + str(d_list[i]))
+print(n // n)
+
+
+
+#varianta 2
+n = int(input('n : '))
+d = 1
+
+while n > 1:
+    d += 1
+    while n % d == 0:
+        print(n, end=' ')
+        print(' | ', end=' ')
+        n = n /d
+        print(d)
+print(n // n)
+
+
+
+16)	Dintre numerele naturale mai mici sau egale cu o valoare dată n, să se afişeze acelea care sunt divizibile cu suma cifrelor lor.
+Exemplu: Pentru n=25 se vor afişa valorile 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20, 21, 24.
+
+
+n = int(input('n : '))
+for num in range(1, n+1):
+    sum = (num % 10) + (num // 10)
+    if num % sum == 0:
+        print(num, end=' ')
+
+
+15)	Să se afişeze primele n numere care au suma cifrelor mai mică sau egală cu m.
+Exemplu: Pentru n=10 şi m=4  se vor afişa numerele 1, 2, 3, 4, 10, 11, 12, 13, 20, 21.
+
+
+n = int(input('n : '))
+m = int(input('m : '))
+
+num = 1
+count = 0
+
+while n != count:
+    sum = (num % 10) + (num // 10)
+    if sum <= m:
+        print(num, end=' ')
+        count += 1
+    num += 1
+
+
+
+14)	Pentru un număr n (între 1 şi 1000) dat să se afişeze mulţimea divizorilor săi naturali (inclusiv 1 şi n), numărul divizorilor lui n şi suma divizorilor lui n.
+Exemplu: Divizorii lui n=20 sunt 1, 2, 4, 5, 10, 20, suma lor este 42, iar numărul lor este 6.
+
+n = int(input("n : "))
+num_list=list(range(1,1001))
+count = 0
+sum = 0
+
+if n in num_list:
+    for i in range(1, n+1):
+       if(n % i == 0):
+           sum += i
+           count += 1
+           print(i)
+    print('Suma = ' + str(sum))
+    print('Lungimea ' + str(count))
+else:
+    print('n nu apartine intervalului [1, 1000]')
+
+
+13)	Să se afişeze numerele naturale mai mici sau egale cu o valoare n dată cu proprietatea că suma cifrelor lor este un număr prim.
+Exemplu: Pentru n=25 se vor afişa valorile 2, 3, 5, 7, 11, 12, 14, 16, 20, 21, 23.
+
+n = int(input("n : "))
+
+def prim(sum:int):
+    prime = True
+    for i in range(2, sum):
+        if (sum % i == 0):
+            prime = False
+    return prime
+
+
+for num in range(1, n+1):
+    sum = 0
+    nr = num
+    while nr > 0:
+        cif = nr % 10
+        nr = nr // 10
+        sum += cif
+    if prim(sum) and sum != 1:
+        print(num, end=' ')
+
+
+12)	Să se afişeze toate perechile de numere palindromice din intervalul [a, b]. O pereche de numere se numeşte palindromică dacă al doilea este răsturnatul primului.
+Exemplu: Pentru a=10 şi b=40 se obţin perechile (11, 11), ( 12, 21), (13, 31), (22, 22), (23, 32), (33, 33).
+
+
+a = int(input("a : "))
+b = int(input("b : "))
+
+li = list(range(a, b))
+li_remove = list(range(a, b))
+
+def reverse(num):
+    num_li = []
+    while num > 0:
+        cif = num % 10
+        num = num // 10
+        num_li.append(cif)
+    strings = [str(num_li) for num_li in num_li]
+    str_list = "".join(strings)
+    num_int = int(str_list)
+    return num_int
+
+
+for num in li:
+    for i in li_remove:
+        if num == reverse(i):
+            print('( ' + str(num) + ' , ' + str(i) + ' )')
+            li_remove.remove(reverse(i))
+
+
+11)	Un număr natural se numeşte perfect daca el este egal cu suma divizorilor săi mai mici decât el. Să se verifice dacă un număr n este perfect sau nu.
+Exemplu: Petnru n=28 este numărul perfect deoarece 28=1+2+4+7+14.
+
+
+n = int(input('n : '))
+sum = 0
+
+for num in range(1, n):
+    if n % num == 0:
+        sum += num
+if sum == n:
+    print('Numaru ' + str(n) + ' este perfect')
+else:
+    print(str(n) + ' nu este perfect')
+
+
+
+10)	Să se afişeze toate numerele prime de 3 cifre care citite invers sunt tot numere prime.
+Exemplu: Un astfel de număr este 761 (761 este prim şi 167 este prim).
+
+
+def reverse(num):
+    num_li = []
+    while num > 0:
+        cif = num % 10
+        num = num // 10
+        num_li.append(cif)
+    strings = [str(num_li) for num_li in num_li]
+    str_list = "".join(strings)
+    num_int = int(str_list)
+    return num_int
+
+def prim(num):
+    prime = True
+    for i in range(2, num):
+        if (num % i == 0):
+            prime = False
+    return prime
+
+
+for num in range(100, 1000):
+    if prim(num) and prim(reverse(num)):
+        print(num, end=' ')
+
+
+
+9)	Determinaţi cel mai mic număr care care exact k divizori.
+Exemplu: Pentru k=4 se obţine numărul 6.
+
+
+k = int(input('k : '))
+nr = 1
+count = 0
+
+while count != k:
+    count = 0
+    for i in range(1, nr + 1):
+        if (nr % i == 0):
+            count += 1
+            print(i)
+    print("")
+    nr += 1
+
+print(nr-1)
+
+
